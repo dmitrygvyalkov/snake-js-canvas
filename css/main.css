@@ -1,0 +1,17 @@
+html {
+  height: 100%;
+}
+
+body {
+  background: #000;
+  height: 100%;
+  margin: 0;
+}
+
+.white {
+  width: 25px;
+  height: 25px;
+  display: block;
+  margin: 0px auto;
+  background: #fff;
+}
