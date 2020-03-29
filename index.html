@@ -17,6 +17,30 @@
 
 <script>
 'use strict';
+
+let canva = document.getElementById('canv');
+let ctx = canva.getContext('2d');
+
+buildGrid();
+/*
+===============================================================================
+Службові функції
+===============================================================================
+*/
+
+function buildGrid() {
+  ctx.beginPath();
+
+  for (let i = 0.5; i < canva.width; i += 25) {
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i, canva.height);
+    ctx.moveTo(0, i);
+    ctx.lineTo(canva.width, i);
+  }
+
+  ctx.stroke();
+}
+
 </script>
 </body>
 </html>
