@@ -20,8 +20,26 @@
 
 let canva = document.getElementById('canv');
 let ctx = canva.getContext('2d');
+const widthCell = 24;
+const heightCell = 24;
+
+let snake = [
+    {
+      x: 15,
+      y: 14,
+    },
+    {
+      x: 15,
+      y: 15,
+    },
+    {
+      x: 15,
+      y: 16,
+    },
+];
 
 buildGrid();
+drawSnake();
 /*
 ===============================================================================
 Службові функції
@@ -39,6 +57,24 @@ function buildGrid() {
   }
 
   ctx.stroke();
+}
+
+function clearCell(coord) {
+  let x = 1 + coord.x * (widthCell + 1);
+  let y = 1 + coord.y * (heightCell + 1);
+  ctx.clearRect(x, y, widthCell, heightCell);
+}
+
+function makeSnakeCell(coord) {
+  let x = 1 + coord.x * (widthCell + 1);
+  let y = 1 + coord.y * (heightCell + 1);
+  ctx.fillRect(x, y, widthCell, heightCell);
+}
+
+function drawSnake() {
+  for (let i=0; i < snake.length; ++i) {
+    makeSnakeCell(snake[i]);
+  }
 }
 
 </script>
