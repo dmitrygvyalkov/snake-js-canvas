@@ -23,7 +23,12 @@ let ctx = canva.getContext('2d');
 const widthCell = 24;
 const heightCell = 24;
 const tickTimeout = 200;
+const tickApple = 50;
 let runDirection = 'up';
+let tickAppleCount = tickApple;
+let apples = [];
+let score = 0;
+let scoreDiv = document.getElementById('score');
 
 let snake = [
     {
@@ -51,6 +56,22 @@ window.addEventListener('keydown', direction);
 ===============================================================================
 */
 
+function buildApple() {
+  let apple = {
+    x: Math.floor( Math.random() * 30 ),
+    y: Math.floor( Math.random() * 30 ),
+  };
+  
+  let x = 1 + apple.x * (widthCell + 1);
+  let y = 1 + apple.y * (heightCell + 1);
+  
+  apples.unshift(apple);
+  console.log(apples);
+  
+  ctx.fillStyle = '#b82020';
+  ctx.fillRect(x, y, widthCell, heightCell);
+}
+
 function direction(event) {
   switch(event.code) {
     case 'ArrowUp':
@@ -71,6 +92,14 @@ function direction(event) {
 }
 
 function tick() {
+  if (tickAppleCount < 0) {
+    tickAppleCount = tickApple;
+    buildApple();
+  } else {
+    --tickAppleCount;
+  }
+
+
   let headCoord = {
     x: snake[0].x,
     y: snake[0].y,
@@ -105,10 +134,29 @@ function tick() {
   if (headCoord.y > 30) {
     headCoord.y = 0;
   }
-  clearCell(snake.pop());
+
+  let a = false;
+
+  for (let i = 0; i < apples.length; ++i) {
+    if ((headCoord.x == apples[i].x) && (headCoord.y == apples[i].y)) {
+      addScore();
+      apples.splice(i, 1);
+      a = true;
+    }
+  }
+
+  if (a == false) {
+    clearCell(snake.pop());
+  }
+
   makeSnakeCell(headCoord);
   snake.unshift(headCoord);
   setTimeout(tick, tickTimeout);
+}
+
+function addScore() {
+  score++;
+  scoreDiv.innerHTML = score;
 }
 
 function buildGrid() {
@@ -133,6 +181,7 @@ function clearCell(coord) {
 function makeSnakeCell(coord) {
   let x = 1 + coord.x * (widthCell + 1);
   let y = 1 + coord.y * (heightCell + 1);
+  ctx.fillStyle = '#000000';
   ctx.fillRect(x, y, widthCell, heightCell);
 }
 
