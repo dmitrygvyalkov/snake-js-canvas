@@ -93,6 +93,18 @@ function tick() {
         headCoord.x += 1;
         break;
     }
+  if (headCoord.x < 0) {
+    headCoord.x = 30;
+  }
+  if (headCoord.y < 0) {
+    headCoord.y = 30;
+  }
+  if (headCoord.x > 30) {
+    headCoord.x = 0;
+  }
+  if (headCoord.y > 30) {
+    headCoord.y = 0;
+  }
   clearCell(snake.pop());
   makeSnakeCell(headCoord);
   snake.unshift(headCoord);
