@@ -23,7 +23,7 @@ let ctx = canva.getContext('2d');
 const widthCell = 24;
 const heightCell = 24;
 let tickTimeout = 200;
-const tickApple = 50;
+const tickApple = 30;
 let runDirection = 'up';
 let tickAppleCount = tickApple;
 let apples = [];
@@ -120,6 +120,7 @@ function direction(event) {
 }
 
 function tick() {
+  minScore();
   if (--tickSpeedCount <= 0) {
     tickSpeedCount = tickSpeed;
     tickTimeout--;
@@ -200,7 +201,12 @@ function tick() {
 }
 
 function addScore() {
-  score++;
+  score += Math.floor(100 / (apples.length + 1) + 1);
+  scoreDiv.innerHTML = score;
+}
+
+function minScore() {
+  score--;
   scoreDiv.innerHTML = score;
 }
 
