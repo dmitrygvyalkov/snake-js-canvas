@@ -22,7 +22,7 @@ let canva = document.getElementById('canv');
 let ctx = canva.getContext('2d');
 const widthCell = 24;
 const heightCell = 24;
-const tickTimeout = 200;
+let tickTimeout = 200;
 const tickApple = 50;
 let runDirection = 'up';
 let tickAppleCount = tickApple;
@@ -30,6 +30,8 @@ let apples = [];
 let score = 0;
 let scoreDiv = document.getElementById('score');
 let gameRun = true;
+const tickSpeed = 50;
+let tickSpeedCount = tickSpeed;
 
 let snake = [
     {
@@ -118,6 +120,12 @@ function direction(event) {
 }
 
 function tick() {
+  if (--tickSpeedCount <= 0) {
+    tickSpeedCount = tickSpeed;
+    tickTimeout--;
+    console.log(tickTimeout);
+  }
+
   if (tickAppleCount < 0) {
     tickAppleCount = tickApple;
     buildApple();
