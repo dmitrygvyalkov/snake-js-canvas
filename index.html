@@ -75,16 +75,42 @@ function buildApple() {
 function direction(event) {
   switch(event.code) {
     case 'ArrowUp':
-      runDirection = 'up';
+      if (snake[0].x == snake[1].x) {
+        if (snake[0].y - snake[1].y != 1) {
+          runDirection = 'up';
+        }
+      } else {
+        runDirection = 'up';
+      }
       break;
     case 'ArrowLeft':
-      runDirection = 'left';
+      if (snake[0].y == snake[1].y) {
+        if (snake[0].x - snake[1].x != 1) {
+          runDirection = 'left';
+        }
+      } else {
+        runDirection = 'left';
+      }
+      
       break;
     case 'ArrowRight':
-      runDirection = 'right';
+      if (snake[0].y == snake[1].y) {
+        if (snake[0].x - snake[1].x != -1) {
+          runDirection = 'right';
+        }
+      } else {
+        runDirection = 'right';
+      }
       break;
     case 'ArrowDown':
-      runDirection = 'down';
+      if (snake[0].x == snake[1].x) {
+        if (snake[0].y - snake[1].y != -1) {
+          runDirection = 'down';
+        }
+      } else {
+        runDirection = 'down';
+      }
+      
       break;  
     default:
       break;
