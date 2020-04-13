@@ -32,6 +32,7 @@ let scoreDiv = document.getElementById('score');
 let gameRun = true;
 const tickSpeed = 50;
 let tickSpeedCount = tickSpeed;
+let spriteApple;
 
 let snake = [
     {
@@ -48,6 +49,7 @@ let snake = [
     },
 ];
 
+buildSprites();
 buildGrid();
 drawSnake();
 tick();
@@ -58,6 +60,16 @@ window.addEventListener('keydown', direction);
 Службові функції
 ===============================================================================
 */
+
+function buildSprites() {
+  let imgApple = document.createElement('img');
+
+  imgApple.onload = function() {
+    spriteApple = imgApple;
+  }
+
+  imgApple.src = 'images/apple.svg';
+}
 
 function buildApple() {
   let apple = {
@@ -70,8 +82,12 @@ function buildApple() {
   
   apples.unshift(apple);
   
+  /*
   ctx.fillStyle = '#b82020';
   ctx.fillRect(x, y, widthCell, heightCell);
+  */
+
+  ctx.drawImage(spriteApple, x, y, 24, 24);
 }
 
 function direction(event) {
@@ -124,7 +140,6 @@ function tick() {
   if (--tickSpeedCount <= 0) {
     tickSpeedCount = tickSpeed;
     tickTimeout--;
-    console.log(tickTimeout);
   }
 
   if (tickAppleCount < 0) {
