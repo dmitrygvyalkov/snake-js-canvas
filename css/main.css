@@ -13,7 +13,7 @@ body {
 }
 
 .block-col--main {
-  background: #fff;
+  background: url(../images/bg-snake.png);
   border: 50px solid #45744b;
   border-radius: 25px;
 }

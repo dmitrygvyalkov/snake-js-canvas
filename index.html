@@ -213,6 +213,8 @@ function minScore() {
 function buildGrid() {
   ctx.beginPath();
 
+  ctx.strokeStyle = '#45744b';
+  
   for (let i = 0.5; i < canva.width; i += 25) {
     ctx.moveTo(i, 0);
     ctx.lineTo(i, canva.height);
